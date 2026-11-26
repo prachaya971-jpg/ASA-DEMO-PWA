@@ -505,6 +505,21 @@ export default function WelcomePage() {
           </div>
         </div>
       </div>
+   {/*  เอาโค้ดก้อนนี้มาแปะแทรกตรงนี้ครับ (ก่อนปิด </div> บรรทัดสุดท้าย) */}
+      <div
+        style={{
+          position: "fixed",
+          left: 0,
+          right: 0,
+          bottom: 0,
+          height: "max(1px, env(safe-area-inset-bottom))",
+          backgroundColor: "#000000",
+          zIndex: 9999,
+          pointerEvents: "none",
+        }}
+      />
     </div>
+
+    
   );
 }

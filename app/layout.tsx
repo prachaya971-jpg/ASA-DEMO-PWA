@@ -17,8 +17,8 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
-  viewportFit: "cover", // <-- เพิ่มบรรทัดนี้เพื่อให้พื้นที่ปุ่มโฮมด้านล่างเป็นสีดำสนิท
-  themeColor: "#0038D1", // <-- ด้านบนยังคงเป็นสีน้ำเงินเหมือนเดิม
+  viewportFit: "cover",
+  themeColor: "#0038D1", // คงแถบด้านบนเป็นสีน้ำเงินเดิม
 };
 
 export const metadata: Metadata = {
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   description: "ARCHITECT'70 UNHEARD HEIGHTS - 27 APR – 02 MAY 2027",
   appleWebApp: {
     capable: true,
-    statusBarStyle: "black-translucent",
+    statusBarStyle: "black-translucent", // ให้แถบบนทะลุเห็นสีน้ำเงิน และแถบล่างทะลุเห็นสีดำ
     title: "สถาปนิก'70",
   },
 };
@@ -37,9 +37,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="th">
+    <html lang="th" style={{ backgroundColor: "#000000" }}>
       <body
-        className={`${inter.className} ${notoSansThai.className} bg-black text-white antialiased min-h-screen`}
+        className={`${inter.className} ${notoSansThai.className}`}
+        style={{
+          backgroundColor: "#000000",
+          color: "#FFFFFF",
+          margin: 0,
+          padding: 0,
+        }}
       >
         {children}
       </body>
