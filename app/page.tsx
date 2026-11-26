@@ -93,20 +93,20 @@ export default function WelcomePage() {
     <div
       className={`${inter.className} ${notoSansThai.className}`}
       style={{
-        minHeight: "100dvh",
+        height: "100dvh",
         width: "100%",
         background:
           "linear-gradient(180deg, #0038D1 0%, #0E3FD4 25%, #D91414 53%, #4A0303 73%, #000000 88%, #000000 100%)",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        justifyContent: "space-between",
+        justifyContent: "center",
         color: "#FFFFFF",
-        overflowX: "hidden",
+        overflow: "hidden",
         boxSizing: "border-box",
       }}
     >
-      {/* Container หลัก */}
+      {/* Container หลักล็อกพอดีความสูงหน้าจอมือถือ 100dvh */}
       <div
         onTouchStart={(e) => handleStart(e.touches[0].clientX)}
         onTouchMove={(e) => handleMove(e.touches[0].clientX)}
@@ -118,33 +118,35 @@ export default function WelcomePage() {
         style={{
           width: "100%",
           maxWidth: "430px",
-          minHeight: "100dvh",
+          height: "100dvh",
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          paddingBottom: "36px",
+          paddingTop: "env(safe-area-inset-top, 12px)",
+          paddingBottom: "max(24px, env(safe-area-inset-bottom, 24px))",
           boxSizing: "border-box",
           overflow: "hidden",
           cursor: isDragging ? "grabbing" : "grab",
           userSelect: "none",
         }}
       >
-        {/* 1. Header Logo: แสดงเฉพาะหน้าที่ 1 */}
+        {/* 1. Header Logo: ลดความสูงช่วงซ่อนในหน้า 2-3 ไม่ให้กินพื้นที่หน้าจอ */}
         <header
           style={{
             width: "100%",
-            minHeight: "76px",
+            height: slides[currentSlide].showHeaderLogo ? "56px" : "18px",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            paddingTop: "42px",
-            paddingBottom: "10px",
+            paddingTop: slides[currentSlide].showHeaderLogo ? "14px" : "0px",
+            paddingBottom: "4px",
             paddingLeft: "24px",
             paddingRight: "24px",
             boxSizing: "border-box",
             opacity: slides[currentSlide].showHeaderLogo ? 1 : 0,
             pointerEvents: slides[currentSlide].showHeaderLogo ? "auto" : "none",
-            transition: "opacity 0.25s ease",
+            transition: "all 0.25s ease",
+            flexShrink: 0,
           }}
         >
           <img
@@ -152,7 +154,7 @@ export default function WelcomePage() {
             alt="ASA | สถาปนิก'70"
             draggable={false}
             style={{
-              height: "38px",
+              height: "34px",
               width: "auto",
               objectFit: "contain",
               mixBlendMode: "screen",
@@ -161,12 +163,13 @@ export default function WelcomePage() {
           />
         </header>
 
-        {/* 2. พื้นที่สไลด์ */}
+        {/* 2. พื้นที่สไลด์ (ยืดหยุ่นตามพื้นที่จอที่เหลือ) */}
         <div
           style={{
             display: "flex",
             width: "100%",
             flex: 1,
+            minHeight: 0,
             transform: `translateX(calc(-${currentSlide * 100}% + ${dragOffset}px))`,
             transition: isDragging ? "none" : "transform 0.35s cubic-bezier(0.25, 1, 0.5, 1)",
           }}
@@ -176,21 +179,27 @@ export default function WelcomePage() {
               key={slide.id}
               style={{
                 width: "100%",
+                height: "100%",
                 flexShrink: 0,
                 display: "flex",
                 flexDirection: "column",
                 justifyContent: "space-between",
               }}
             >
-              {/* ส่วนภาพประกอบตรงกลาง */}
+              {/* ส่วนภาพประกอบตรงกลาง: ย่อ-ขยายอัตโนมัติไม่ให้ดันข้อความด้านล่างตกจอ */}
               <div
                 style={{
                   width: "100%",
+                  flex: 1,
+                  minHeight: 0,
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
                   justifyContent: "center",
                   position: "relative",
+                  paddingLeft: slide.id === "welcome" ? "0px" : "16px",
+                  paddingRight: slide.id === "welcome" ? "0px" : "16px",
+                  boxSizing: "border-box",
                 }}
               >
                 <img
@@ -198,7 +207,9 @@ export default function WelcomePage() {
                   alt={`Slide ${index + 1}`}
                   draggable={false}
                   style={{
-                    width: slide.id === "event" ? "88%" : "100%",
+                    width: slide.id === "welcome" ? "100%" : "auto",
+                    maxWidth: slide.id === "event" ? "84%" : "100%",
+                    maxHeight: slide.pillType !== "none" ? "36dvh" : "43dvh",
                     height: "auto",
                     objectFit: "contain",
                     display: "block",
@@ -210,11 +221,11 @@ export default function WelcomePage() {
                 {slide.pillType === "search" && (
                   <div
                     style={{
-                      marginTop: "20px",
-                      paddingLeft: "26px",
-                      paddingRight: "28px",
-                      height: "52px",
-                      borderRadius: "20px",
+                      marginTop: "14px",
+                      paddingLeft: "24px",
+                      paddingRight: "26px",
+                      height: "46px",
+                      borderRadius: "18px",
                       background:
                         "linear-gradient(180deg, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0.16) 100%)",
                       border: "1.5px solid rgba(255, 255, 255, 0.35)",
@@ -223,16 +234,17 @@ export default function WelcomePage() {
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      gap: "12px",
+                      gap: "10px",
                       color: "#FFFFFF",
-                      fontSize: "15.5px",
+                      fontSize: "14.5px",
                       fontWeight: 400,
                       letterSpacing: "0.01em",
                       boxShadow:
                         "0 8px 24px rgba(0, 0, 0, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.3)",
+                      flexShrink: 0,
                     }}
                   >
-                    <Search size={20} strokeWidth={2.2} color="#FFFFFF" />
+                    <Search size={18} strokeWidth={2.2} color="#FFFFFF" />
                     <span style={{ opacity: 0.95 }}>Search my event..</span>
                   </div>
                 )}
@@ -241,11 +253,11 @@ export default function WelcomePage() {
                 {slide.pillType === "scan" && (
                   <div
                     style={{
-                      marginTop: "-22px",
-                      paddingLeft: "12px",
-                      paddingRight: "22px",
-                      height: "50px",
-                      borderRadius: "18px",
+                      marginTop: "-18px",
+                      paddingLeft: "10px",
+                      paddingRight: "20px",
+                      height: "46px",
+                      borderRadius: "16px",
                       background:
                         "linear-gradient(180deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.14) 100%)",
                       border: "1.5px solid rgba(255, 255, 255, 0.3)",
@@ -254,20 +266,20 @@ export default function WelcomePage() {
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      gap: "12px",
+                      gap: "10px",
                       color: "#FFFFFF",
-                      fontSize: "15px",
+                      fontSize: "14.5px",
                       fontWeight: 500,
                       boxShadow:
                         "0 8px 24px rgba(0, 0, 0, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.28)",
                       zIndex: 10,
+                      flexShrink: 0,
                     }}
                   >
-                    {/* กล่องไอคอนสแกนไล่เฉดสีน้ำเงิน-ชมพู */}
                     <div
                       style={{
-                        width: "30px",
-                        height: "30px",
+                        width: "28px",
+                        height: "28px",
                         borderRadius: "8px",
                         background: "linear-gradient(135deg, #2563EB 0%, #D91464 100%)",
                         display: "flex",
@@ -281,8 +293,8 @@ export default function WelcomePage() {
                         alt="Scan"
                         draggable={false}
                         style={{
-                          width: "16px",
-                          height: "16px",
+                          width: "15px",
+                          height: "15px",
                           objectFit: "contain",
                         }}
                       />
@@ -298,14 +310,15 @@ export default function WelcomePage() {
                   width: "100%",
                   paddingLeft: "24px",
                   paddingRight: "24px",
-                  paddingTop: "16px",
+                  paddingTop: "10px",
                   boxSizing: "border-box",
+                  flexShrink: 0,
                 }}
               >
                 <h1
                   style={{
                     margin: 0,
-                    fontSize: "37.8px",
+                    fontSize: "clamp(30px, 8.8vw, 36px)",
                     fontWeight: 800,
                     lineHeight: 1.06,
                     letterSpacing: "-0.02em",
@@ -320,10 +333,10 @@ export default function WelcomePage() {
                 {slide.description ? (
                   <p
                     style={{
-                      marginTop: "12px",
+                      marginTop: "10px",
                       marginBottom: 0,
-                      fontSize: "14px",
-                      lineHeight: "22px",
+                      fontSize: "13.5px",
+                      lineHeight: "20px",
                       fontWeight: 400,
                       color: "rgba(255, 255, 255, 0.88)",
                     }}
@@ -333,12 +346,12 @@ export default function WelcomePage() {
                 ) : (
                   <div
                     style={{
-                      marginTop: "12px",
+                      marginTop: "10px",
                       display: "flex",
                       flexDirection: "column",
-                      gap: "4px",
+                      gap: "2px",
                       fontSize: "14px",
-                      lineHeight: "24px",
+                      lineHeight: "21px",
                     }}
                   >
                     <p style={{ margin: 0, fontWeight: 500, color: "rgba(255, 255, 255, 0.95)" }}>
@@ -360,11 +373,12 @@ export default function WelcomePage() {
             width: "100%",
             paddingLeft: "24px",
             paddingRight: "24px",
-            paddingTop: "22px",
+            paddingTop: "16px",
             display: "flex",
             flexDirection: "column",
-            gap: "22px",
+            gap: "16px",
             boxSizing: "border-box",
+            flexShrink: 0,
           }}
         >
           {/* Pagination Dots */}
@@ -373,7 +387,6 @@ export default function WelcomePage() {
               display: "flex",
               alignItems: "center",
               gap: "8px",
-              paddingTop: "2px",
             }}
           >
             {slides.map((_, index) => (
@@ -396,7 +409,7 @@ export default function WelcomePage() {
           </div>
 
           {/* ปุ่มด้านล่าง: หน้าที่ 1-2 แสดง Next | หน้าที่ 3 แสดง Guest และ Login */}
-          <div style={{ paddingTop: "4px" }}>
+          <div>
             {currentSlide < slides.length - 1 ? (
               <button
                 onClick={handleNext}
