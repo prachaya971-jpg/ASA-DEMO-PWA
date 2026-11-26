@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent", // ให้แถบบนทะลุเห็นสีน้ำเงิน และแถบล่างทะลุเห็นสีดำ
-    title: "สถาปนิก'70",
+    title: "ASA'70",
   },
 };
 
