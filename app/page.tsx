@@ -93,10 +93,13 @@ export default function WelcomePage() {
     <div
       className={`${inter.className} ${notoSansThai.className}`}
       style={{
-        height: "100dvh",
+        position: "fixed",
+        inset: 0,
         width: "100%",
-        background:
-          "linear-gradient(180deg, #0038D1 0%, #0E3FD4 25%, #D91414 53%, #4A0303 73%, #000000 88%, #000000 100%)",
+        height: "100%",
+        backgroundColor: "#000000", // พื้นฐานด้านล่างสุดเป็นสีดำสนิท
+        backgroundImage:
+          "linear-gradient(180deg, #0038D1 0%, #0E3FD4 25%, #D91414 53%, #4A0303 73%, #000000 86%, #000000 100%)",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",

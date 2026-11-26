@@ -17,7 +17,8 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
-  themeColor: "#0038D1",
+  viewportFit: "cover", // <-- เพิ่มบรรทัดนี้เพื่อให้พื้นที่ปุ่มโฮมด้านล่างเป็นสีดำสนิท
+  themeColor: "#0038D1", // <-- ด้านบนยังคงเป็นสีน้ำเงินเหมือนเดิม
 };
 
 export const metadata: Metadata = {
