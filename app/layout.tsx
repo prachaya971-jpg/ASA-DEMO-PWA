@@ -22,12 +22,16 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "ASA | สถาปนิก'70",
+  title: "ASA | สถาปนิก'70", // <-- เปลี่ยนชื่อข้อความบนแท็บตรงนี้
   description: "ARCHITECT'70 UNHEARD HEIGHTS - 27 APR – 02 MAY 2027",
+  icons: {
+    icon: "/icons/logo.png",   // <-- ไอคอนบนแท็บเบราว์เซอร์
+    apple: "/icons/logo.png",  // <-- ไอคอนตอนเพิ่มลงหน้าจอโฮม iOS
+  },
   appleWebApp: {
     capable: true,
-    statusBarStyle: "black-translucent", // ให้แถบบนทะลุเห็นสีน้ำเงิน และแถบล่างทะลุเห็นสีดำ
-    title: "ASA'70",
+    statusBarStyle: "black-translucent",
+    title: "สถาปนิก'70",
   },
 };
 
