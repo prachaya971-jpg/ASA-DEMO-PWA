@@ -91,13 +91,13 @@ export default function WelcomePage() {
 
   return (
     <div
-      className={`${inter.className} ${notoSansThai.className}`}
+      className={`${inter.className} ${notoSansThai.className} asa-wrapper`}
       style={{
         position: "fixed",
         inset: 0,
         width: "100%",
         height: "100%",
-        backgroundColor: "#000000", // พื้นฐานด้านล่างสุดเป็นสีดำสนิท
+        backgroundColor: "#000000",
         backgroundImage:
           "linear-gradient(180deg, #0038D1 0%, #0E3FD4 25%, #D91414 53%, #4A0303 73%, #000000 86%, #000000 100%)",
         display: "flex",
@@ -109,8 +109,148 @@ export default function WelcomePage() {
         boxSizing: "border-box",
       }}
     >
-      {/* Container หลักล็อกพอดีความสูงหน้าจอมือถือ 100dvh */}
+      {/* CSS Responsive สำหรับ Mobile และ iPad */}
+      <style>{`
+        .asa-container {
+          width: 100%;
+          max-width: 430px;
+          height: 100dvh;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          padding-top: env(safe-area-inset-top, 12px);
+          padding-bottom: max(24px, env(safe-area-inset-bottom, 24px));
+          box-sizing: border-box;
+          overflow: hidden;
+          user-select: none;
+        }
+
+        .asa-slide {
+          width: 100%;
+          height: 100%;
+          flex-shrink: 0;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+        }
+
+        .asa-media-box {
+          width: 100%;
+          flex: 1;
+          min-height: 0;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          position: relative;
+          box-sizing: border-box;
+        }
+
+        .asa-slide-img {
+          height: auto;
+          object-fit: contain;
+          display: block;
+          user-select: none;
+        }
+
+        .asa-text-box {
+          width: 100%;
+          padding: 10px 24px 0 24px;
+          box-sizing: border-box;
+          flex-shrink: 0;
+        }
+
+        .asa-title {
+          margin: 0;
+          font-size: clamp(30px, 8.8vw, 36px);
+          font-weight: 800;
+          line-height: 1.06;
+          letter-spacing: -0.02em;
+          text-transform: uppercase;
+          white-space: pre-line;
+          color: #FFFFFF;
+        }
+
+        .asa-desc {
+          margin-top: 10px;
+          margin-bottom: 0;
+          font-size: 13.5px;
+          line-height: 20px;
+          font-weight: 400;
+          color: rgba(255, 255, 255, 0.88);
+        }
+
+        .asa-meta {
+          margin-top: 10px;
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+          font-size: 14px;
+          line-height: 21px;
+        }
+
+        .asa-controls {
+          width: 100%;
+          padding: 16px 24px 0 24px;
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+          box-sizing: border-box;
+          flex-shrink: 0;
+        }
+
+        .asa-btn-group {
+          width: 100%;
+        }
+
+        .asa-btn {
+          height: 44px;
+          font-size: 16px;
+        }
+
+        /* ================= iPad / Tablet (>= 768px) ================= */
+        @media (min-width: 768px) {
+          .asa-container {
+            max-width: 680px;
+            padding-top: 28px;
+            padding-bottom: 36px;
+          }
+
+          .asa-text-box {
+            padding: 16px 40px 0 40px;
+          }
+
+          .asa-title {
+            font-size: 44px;
+          }
+
+          .asa-desc {
+            font-size: 16px;
+            line-height: 25px;
+            margin-top: 14px;
+          }
+
+          .asa-meta {
+            font-size: 16px;
+            line-height: 25px;
+            margin-top: 14px;
+          }
+
+          .asa-controls {
+            padding: 24px 40px 0 40px;
+            gap: 20px;
+          }
+
+          .asa-btn {
+            height: 52px;
+            font-size: 17px;
+          }
+        }
+      `}</style>
+
+      {/* Container หลัก */}
       <div
+        className="asa-container"
         onTouchStart={(e) => handleStart(e.touches[0].clientX)}
         onTouchMove={(e) => handleMove(e.touches[0].clientX)}
         onTouchEnd={handleEnd}
@@ -119,21 +259,10 @@ export default function WelcomePage() {
         onMouseUp={handleEnd}
         onMouseLeave={handleEnd}
         style={{
-          width: "100%",
-          maxWidth: "430px",
-          height: "100dvh",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          paddingTop: "env(safe-area-inset-top, 12px)",
-          paddingBottom: "max(24px, env(safe-area-inset-bottom, 24px))",
-          boxSizing: "border-box",
-          overflow: "hidden",
           cursor: isDragging ? "grabbing" : "grab",
-          userSelect: "none",
         }}
       >
-        {/* 1. Header Logo: ลดความสูงช่วงซ่อนในหน้า 2-3 ไม่ให้กินพื้นที่หน้าจอ */}
+        {/* 1. Header Logo */}
         <header
           style={{
             width: "100%",
@@ -166,7 +295,7 @@ export default function WelcomePage() {
           />
         </header>
 
-        {/* 2. พื้นที่สไลด์ (ยืดหยุ่นตามพื้นที่จอที่เหลือ) */}
+        {/* 2. พื้นที่สไลด์ */}
         <div
           style={{
             display: "flex",
@@ -178,45 +307,24 @@ export default function WelcomePage() {
           }}
         >
           {slides.map((slide, index) => (
-            <div
-              key={slide.id}
-              style={{
-                width: "100%",
-                height: "100%",
-                flexShrink: 0,
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-              }}
-            >
-              {/* ส่วนภาพประกอบตรงกลาง: ย่อ-ขยายอัตโนมัติไม่ให้ดันข้อความด้านล่างตกจอ */}
+            <div key={slide.id} className="asa-slide">
+              {/* ส่วนภาพประกอบ */}
               <div
+                className="asa-media-box"
                 style={{
-                  width: "100%",
-                  flex: 1,
-                  minHeight: 0,
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  position: "relative",
                   paddingLeft: slide.id === "welcome" ? "0px" : "16px",
                   paddingRight: slide.id === "welcome" ? "0px" : "16px",
-                  boxSizing: "border-box",
                 }}
               >
                 <img
                   src={slide.image}
                   alt={`Slide ${index + 1}`}
                   draggable={false}
+                  className="asa-slide-img"
                   style={{
                     width: slide.id === "welcome" ? "100%" : "auto",
                     maxWidth: slide.id === "event" ? "84%" : "100%",
                     maxHeight: slide.pillType !== "none" ? "36dvh" : "43dvh",
-                    height: "auto",
-                    objectFit: "contain",
-                    display: "block",
-                    userSelect: "none",
                   }}
                 />
 
@@ -307,56 +415,14 @@ export default function WelcomePage() {
                 )}
               </div>
 
-              {/* ข้อความหัวข้อและรายละเอียดด้านล่าง */}
-              <div
-                style={{
-                  width: "100%",
-                  paddingLeft: "24px",
-                  paddingRight: "24px",
-                  paddingTop: "10px",
-                  boxSizing: "border-box",
-                  flexShrink: 0,
-                }}
-              >
-                <h1
-                  style={{
-                    margin: 0,
-                    fontSize: "clamp(30px, 8.8vw, 36px)",
-                    fontWeight: 800,
-                    lineHeight: 1.06,
-                    letterSpacing: "-0.02em",
-                    textTransform: "uppercase",
-                    whiteSpace: "pre-line",
-                    color: "#FFFFFF",
-                  }}
-                >
-                  {slide.title}
-                </h1>
+              {/* ข้อความหัวข้อและรายละเอียด */}
+              <div className="asa-text-box">
+                <h1 className="asa-title">{slide.title}</h1>
 
                 {slide.description ? (
-                  <p
-                    style={{
-                      marginTop: "10px",
-                      marginBottom: 0,
-                      fontSize: "13.5px",
-                      lineHeight: "20px",
-                      fontWeight: 400,
-                      color: "rgba(255, 255, 255, 0.88)",
-                    }}
-                  >
-                    {slide.description}
-                  </p>
+                  <p className="asa-desc">{slide.description}</p>
                 ) : (
-                  <div
-                    style={{
-                      marginTop: "10px",
-                      display: "flex",
-                      flexDirection: "column",
-                      gap: "2px",
-                      fontSize: "14px",
-                      lineHeight: "21px",
-                    }}
-                  >
+                  <div className="asa-meta">
                     <p style={{ margin: 0, fontWeight: 500, color: "rgba(255, 255, 255, 0.95)" }}>
                       {slide.date}
                     </p>
@@ -371,19 +437,7 @@ export default function WelcomePage() {
         </div>
 
         {/* 3. ส่วนควบคุมด้านล่าง: Pagination Dots + ปุ่ม */}
-        <div
-          style={{
-            width: "100%",
-            paddingLeft: "24px",
-            paddingRight: "24px",
-            paddingTop: "16px",
-            display: "flex",
-            flexDirection: "column",
-            gap: "16px",
-            boxSizing: "border-box",
-            flexShrink: 0,
-          }}
-        >
+        <div className="asa-controls">
           {/* Pagination Dots */}
           <div
             style={{
@@ -411,20 +465,19 @@ export default function WelcomePage() {
             ))}
           </div>
 
-          {/* ปุ่มด้านล่าง: หน้าที่ 1-2 แสดง Next | หน้าที่ 3 แสดง Guest และ Login */}
-          <div>
+          {/* ปุ่มด้านล่าง */}
+          <div className="asa-btn-group">
             {currentSlide < slides.length - 1 ? (
               <button
                 onClick={handleNext}
+                className="asa-btn"
                 style={{
                   width: "100%",
-                  height: "44px",
                   paddingLeft: "24px",
                   paddingRight: "24px",
                   borderRadius: "14px",
                   background: "linear-gradient(90deg, #E61919 0%, #80199C 50%, #0044FF 100%)",
                   color: "#FFFFFF",
-                  fontSize: "16px",
                   fontWeight: 600,
                   letterSpacing: "0.01em",
                   fontFamily: "inherit",
@@ -453,13 +506,12 @@ export default function WelcomePage() {
                 {/* ปุ่ม Guest */}
                 <button
                   onClick={() => router.push("/home")}
+                  className="asa-btn"
                   style={{
                     flex: 1,
-                    height: "44px",
                     borderRadius: "14px",
                     backgroundColor: "#242426",
                     color: "#FFFFFF",
-                    fontSize: "16px",
                     fontWeight: 600,
                     fontFamily: "inherit",
                     display: "flex",
@@ -478,13 +530,12 @@ export default function WelcomePage() {
                 {/* ปุ่ม Login */}
                 <button
                   onClick={() => router.push("/login")}
+                  className="asa-btn"
                   style={{
                     flex: 1,
-                    height: "44px",
                     borderRadius: "14px",
                     background: "linear-gradient(90deg, #E61919 0%, #80199C 50%, #0044FF 100%)",
                     color: "#FFFFFF",
-                    fontSize: "16px",
                     fontWeight: 600,
                     fontFamily: "inherit",
                     display: "flex",
@@ -505,7 +556,8 @@ export default function WelcomePage() {
           </div>
         </div>
       </div>
-   {/*  เอาโค้ดก้อนนี้มาแปะแทรกตรงนี้ครับ (ก่อนปิด </div> บรรทัดสุดท้าย) */}
+
+      {/* แถบสีดำปิดขอบล่าง Safe Area */}
       <div
         style={{
           position: "fixed",
@@ -519,7 +571,5 @@ export default function WelcomePage() {
         }}
       />
     </div>
-
-    
   );
 }

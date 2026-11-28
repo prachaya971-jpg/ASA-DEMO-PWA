@@ -25,8 +25,8 @@ export const metadata: Metadata = {
   title: "ASA | สถาปนิก'70", // <-- เปลี่ยนชื่อข้อความบนแท็บตรงนี้
   description: "ARCHITECT'70 UNHEARD HEIGHTS - 27 APR – 02 MAY 2027",
   icons: {
-    icon: "/icons/logo.png",   // <-- ไอคอนบนแท็บเบราว์เซอร์
-    apple: "/icons/logo.png",  // <-- ไอคอนตอนเพิ่มลงหน้าจอโฮม iOS
+    icon: "/icons/logo.png?v=2",
+    apple: "/icons/logo.png?v=2",
   },
   appleWebApp: {
     capable: true,
