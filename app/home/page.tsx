@@ -142,17 +142,17 @@ function HomeContent() {
             />
           </div>
 
-          {/* ================= 2. EVENT PASS BAR ================= */}
+         {/* ================= 2. EVENT PASS BAR ================= */}
           <div
             style={{
               position: "relative",
-              marginTop: "14px",
-              padding: "12px 16px 12px 20px",
+              marginTop: "12px",
+              padding: "10px 14px 10px 16px",
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-              gap: "12px",
-              minHeight: "70px",
+              gap: "8px",
+              minHeight: "58px",
               boxSizing: "border-box",
             }}
           >
@@ -167,10 +167,11 @@ function HomeContent() {
               style={{
                 position: "relative",
                 zIndex: 1,
-                fontSize: "12px",
+                fontSize: "11px",
                 fontWeight: 500,
-                lineHeight: 1.38,
+                lineHeight: 1.35,
                 color: "#FFFFFF",
+                whiteSpace: "nowrap",
               }}
             >
               Beyond What You Imagine.
@@ -189,24 +190,24 @@ function HomeContent() {
                   color: "#000000",
                   border: "none",
                   borderRadius: "9999px",
-                  padding: "8px 8px 8px 24px",
+                  padding: "5px 5px 5px 14px",
                   display: "flex",
                   alignItems: "center",
-                  gap: "14px",
-                  fontSize: "14.5px",
+                  gap: "10px",
+                  fontSize: "12px",
                   fontWeight: 800,
                   letterSpacing: "0.02em",
                   fontFamily: "inherit",
                   cursor: "pointer",
                   flexShrink: 0,
-                  boxShadow: "0 6px 18px rgba(0,0,0,0.3)",
+                  boxShadow: "0 6px 16px rgba(0,0,0,0.3)",
                 }}
               >
                 <span>MY EVENT PASS</span>
                 <span
                   style={{
-                    width: "42px",
-                    height: "42px",
+                    width: "32px",
+                    height: "32px",
                     borderRadius: "9999px",
                     background: "linear-gradient(135deg, #E61919 0%, #80199C 50%, #0044FF 100%)",
                     display: "flex",
@@ -217,7 +218,7 @@ function HomeContent() {
                   <img
                     src="/images/qr_code_2.png"
                     alt="QR"
-                    style={{ width: "22px", height: "22px", objectFit: "contain" }}
+                    style={{ width: "17px", height: "17px", objectFit: "contain" }}
                   />
                 </span>
               </button>
@@ -232,24 +233,24 @@ function HomeContent() {
                   color: "#000000",
                   border: "none",
                   borderRadius: "9999px",
-                  padding: "5px 6px 5px 16px",
+                  padding: "5px 5px 5px 13px",
                   display: "flex",
                   alignItems: "center",
-                  gap: "10px",
-                  fontSize: "12px",
+                  gap: "8px",
+                  fontSize: "11px",
                   fontWeight: 800,
                   letterSpacing: "0.02em",
                   fontFamily: "inherit",
                   cursor: "pointer",
                   flexShrink: 0,
-                  boxShadow: "0 6px 18px rgba(0,0,0,0.3)",
+                  boxShadow: "0 6px 16px rgba(0,0,0,0.3)",
                 }}
               >
                 <span>GET MY EVENT PASS</span>
                 <span
                   style={{
-                    width: "34px",
-                    height: "34px",
+                    width: "32px",
+                    height: "32px",
                     borderRadius: "9999px",
                     background: "linear-gradient(135deg, #E61919 0%, #80199C 50%, #0044FF 100%)",
                     color: "#FFFFFF",
@@ -258,12 +259,12 @@ function HomeContent() {
                     justifyContent: "center",
                   }}
                 >
-                  <LogIn size={16} />
+                  <LogIn size={15} />
                 </span>
               </button>
             )}
           </div>
-        </div>
+          </div>
 
         {/* ================= 3. UPCOMING EVENT ================= */}
         <section style={{ padding: "20px 20px 0 20px" }}>
